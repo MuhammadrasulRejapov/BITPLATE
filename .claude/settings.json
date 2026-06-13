@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c ' *)",
+      "Bash(dotnet --version)",
+      "Bash(dotnet new *)",
+      "Bash(dotnet build *)",
+      "Bash(psql --version)",
+      "Bash(pg_isready -h localhost)",
+      "Bash(dotnet add *)",
+      "Bash(psql -U rejapov -c \"SELECT current_user, version\\(\\);\")",
+      "Bash(sudo -u postgres psql -c \"CREATE USER rejapov WITH PASSWORD 'biteplate123' CREATEDB;\")",
+      "Bash(sudo -u postgres psql -c \"CREATE DATABASE biteplate OWNER rejapov;\")",
+      "Bash(psql -h localhost -U postgres -c \"SELECT current_user;\")",
+      "Read(//etc/postgresql/**)",
+      "Bash(grep -v \"^$\")",
+      "Read(//etc/**)",
+      "Read(//var/**)",
+      "Read(//usr/**)",
+      "Bash(PGPASSWORD=postgres psql -h localhost -U postgres -c \"SELECT 1;\")",
+      "Bash(PGPASSWORD=postgres psql -h 127.0.0.1 -U postgres -c \"SELECT version\\(\\);\")",
+      "Bash(su -c \"psql -c \\\\\"CREATE USER biteplate WITH PASSWORD 'biteplate123' CREATEDB; CREATE DATABASE biteplate OWNER biteplate;\\\\\"\" postgres)",
+      "Bash(pg_lsclusters)",
+      "Read(//run/postgresql/**)",
+      "Bash(psql -d postgres -c \"SELECT current_user;\")",
+      "Read(//home/rejapov/**)",
+      "Bash(PGPASSWORD=\"\" psql -h localhost -U postgres -d postgres -c \"SELECT 1;\")",
+      "Bash(docker --version)",
+      "Bash(docker compose *)",
+      "Bash(curl -s http://localhost:5000/api/tables)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000)",
+      "Bash(curl -s -X POST http://localhost:5000/api/auth/login -H 'Content-Type: application/json' -d '{\"username\":\"admin\",\"password\":\"admin\"}')",
+      "Bash(python3 -m json.tool)",
+      "Bash(curl -s -X POST http://localhost:5000/api/auth/login -H \"Content-Type: application/json\" -d '{\"username\":\"admin\",\"password\":\"admin\"}')",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('✓ Login OK | Role:', d['role'], '| User:', d['displayName']\\)\")",
+      "Bash(curl -s -X POST http://localhost:5000/api/auth/login -H \"Content-Type: application/json\" -d '{\"username\":\"manager\",\"password\":\"manager123\"}')",
+      "Bash(python3 -c \"import sys,json; d=json.load\\(sys.stdin\\); print\\('✓ Login:', d['username'], '| Role:', d['role'], '| Ism:', d['displayName']\\)\")"
+    ]
+  }
+}

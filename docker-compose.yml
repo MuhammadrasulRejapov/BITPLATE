@@ -1,0 +1,52 @@
+services:
+
+  postgres:
+    image: postgres:17-alpine
+    container_name: biteplate_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: biteplate_user
+      POSTGRES_PASSWORD: biteplate123
+      POSTGRES_DB: biteplate
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U biteplate_user -d biteplate"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: ./backend/BitePlate.API
+      dockerfile: Dockerfile
+    container_name: biteplate_api
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      ConnectionStrings__Default: "Host=postgres;Port=5432;Database=biteplate;Username=biteplate_user;Password=biteplate123"
+      Jwt__Key: "BitePlate_SuperSecret_JWT_Key_2024_Min32Chars!!"
+      Jwt__Issuer: "BitePlateAPI"
+      Jwt__Audience: "BitePlateFrontend"
+      ASPNETCORE_ENVIRONMENT: "Production"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: biteplate_web
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:
+    name: biteplate_pgdata

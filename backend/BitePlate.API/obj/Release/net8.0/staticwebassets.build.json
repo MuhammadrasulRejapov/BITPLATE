@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "paY2rXnipKwQLAm5y4PAhMEmQ7ZFa2W7CENE6v6UTH0=",
+  "Source": "BitePlate.API",
+  "BasePath": "_content/BitePlate.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
